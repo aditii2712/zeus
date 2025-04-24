@@ -510,7 +510,7 @@ export default class LightningNodeConnect {
         const signed = await this.signMessage(r_hash);
         return {
             signature: new sha256Hash()
-                .update(Base64Utils.stringToUint8Array(signed.signature))
+                .update(Base64Utils.textToCharCodeBytes(signed.signature))
                 .digest()
         };
     };
@@ -539,6 +539,7 @@ export default class LightningNodeConnect {
     supportsKeysend = () => true;
     supportsChannelManagement = () => this.permOpenChannel;
     supportsPendingChannels = () => true;
+    supportsClosedChannels = () => true;
     supportsMPP = () => this.supports('v0.10.0');
     supportsAMP = () => this.supports('v0.13.0');
     supportsCoinControl = () => this.permNewAddress;

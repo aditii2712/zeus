@@ -630,7 +630,7 @@ export default class LND {
         const signed = await this.signMessage(r_hash);
         return {
             signature: new sha256Hash()
-                .update(Base64Utils.stringToUint8Array(signed.signature))
+                .update(Base64Utils.textToCharCodeBytes(signed.signature))
                 .digest()
         };
     };
@@ -710,6 +710,7 @@ export default class LND {
     supportsKeysend = () => true;
     supportsChannelManagement = () => true;
     supportsPendingChannels = () => true;
+    supportsClosedChannels = () => true;
     supportsMPP = () => this.supports('v0.10.0');
     supportsAMP = () => this.supports('v0.13.0');
     supportsCoinControl = () => this.supports('v0.12.0');
